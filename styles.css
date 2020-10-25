@@ -46,7 +46,7 @@ footer {
 
 }
 
-.add-book-form {
+.form-container {
     background-color: white;
     grid-column: 2 / 3;
     height: 200px;

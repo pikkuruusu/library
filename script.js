@@ -21,9 +21,26 @@ addBookToLibrary(myLibrary, "Best book", "Staffan", 234, true);
 addBookToLibrary(myLibrary, "Best book 2", "Staffan S", 234, true);
 
 const bookList = document.querySelector(".book-list");
-myLibrary.forEach((book, index) => {
-    let bookItem = document.createElement('li');
-    bookItem.setAttribute("data-index", index);
-    bookItem.textContent = book.info();
-    bookList.appendChild(bookItem);
+const printBooks = function() {
+    //Todo need to stop it from printing everything out if ti is already there
+    bookList.textContent = '';
+    myLibrary.forEach((book, index) => {
+        let bookItem = document.createElement('li');
+        bookItem.setAttribute("data-index", index);
+        bookItem.textContent = book.info();
+        bookList.appendChild(bookItem);
+    })
+};
+printBooks();
+
+const addBookForm = document.getElementById('add-book');
+addBookForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    let title = document.getElementById('title').value;
+    let author = document.getElementById('author').value;
+    let pages = document.getElementById('pages').value;
+    let isRead = document.getElementById('isread').checked;
+    addBookToLibrary(myLibrary, title, author, pages, isRead);
+    printBooks();
+
 })
