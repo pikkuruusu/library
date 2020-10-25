@@ -1,0 +1,51 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: auto minmax(300px, 800px) auto;
+    grid-template-rows: 50px auto 50px;
+    background-color: #F2F2F2;
+}
+
+header {
+    background-image: linear-gradient(rgba(217, 202, 173, 0.2), rgba(217, 202, 173, 1));
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    display: grid;
+    grid-template-columns: auto minmax(300px, 800px) auto;
+    box-shadow: 0px 3px 7px 2px rgba(38,21,15,0.2);
+    z-index: 2;
+}
+
+.test {
+    grid-column-start: 2;
+}
+
+main {
+    background-color: #F2F2F2;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    z-index: 1;
+
+}
+
+footer {
+    background-color: #F2F2F2;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 3;
+    display: grid;
+    grid-template-columns: auto minmax(300px, 800px) auto;
+    grid-template-rows: 40px auto 40px;
+    justify-items: end;
+    box-shadow: 0px -3px 7px 2px rgba(38,21,15,0.2);
+    z-index: 2;
+
+}
+
+.add-book-button {
+    grid-column-start: 2;
+}
