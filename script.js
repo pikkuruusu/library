@@ -39,8 +39,9 @@ const printBooks = function() {
         bookItem.textContent = book.info();
         let removeButton = document.createElement('span');
         removeButton.setAttribute('class', 'remove-button');
-        removeButton.textContent = 'Remove';
+        removeButton.appendChild(createRemoveSVG());
         bookItem.appendChild(removeButton);
+        
         bookList.appendChild(bookItem);
     })
 
@@ -53,7 +54,6 @@ const printBooks = function() {
 });
 };
 
-
 const addBookForm = document.getElementById('add-book');
 addBookForm.addEventListener('submit', function(e) {
     e.preventDefault();
@@ -63,6 +63,37 @@ addBookForm.addEventListener('submit', function(e) {
     let isRead = document.getElementById('isread').checked;
     addBookToLibrary(myLibrary, title, author, pages, isRead);
 });
+
+const showFormButton = document.querySelector('.add-book-button');
+const formContainer = document.querySelector('.form-container');
+showFormButton.addEventListener('click', function(e) {
+    if (formContainer.classList.contains('show')) {
+        formContainer.classList.remove('show');
+    } else {
+        formContainer.classList.add('show');
+    }
+})
+
+
+const createRemoveSVG = function() {
+    let xlmns = 'http://www.w3.org/2000/svg';
+    let svg = document.createElementNS(xlmns, 'svg');
+    svg.setAttributeNS(null, 'width', '1.5em');
+    svg.setAttributeNS(null, 'height', '1.5em');
+    svg.setAttributeNS(null, 'viewBox', '0 0 16 16');
+    svg.setAttributeNS(null, 'class', 'bi bi-x-circle');
+    svg.setAttributeNS(null, 'fill', 'currentColor');
+    let pathOne = document.createElementNS(xlmns, 'path');
+    pathOne.setAttributeNS(null, 'fill-rule', 'evenodd');
+    pathOne.setAttributeNS(null, 'd', 'M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z');
+    let pathTwo = document.createElementNS(xlmns, 'path');
+    pathTwo.setAttributeNS(null, 'fill-rule', 'evenodd');
+    pathTwo.setAttributeNS(null, 'd', 'M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z');
+    svg.appendChild(pathOne);
+    svg.appendChild(pathTwo);
+    return svg;
+}
+
 
 addBookToLibrary(myLibrary, "Best book", "Staffan", 234, true);
 addBookToLibrary(myLibrary, "Best book 2", "Staffan S", 234, true);
