@@ -12,6 +12,10 @@ Book.prototype.info = function() {
     return `${this.title} by ${this.author}, ${this.pages} pages, ${readString}`; 
 }
 
+Book.prototype.changeReadStatus = function() {
+    return !this.isRead;
+}
+
 function addBookToLibrary(library, title, author, pages, isRead) {
     let bookToAdd = new Book(title, author, pages, isRead);
     library.push(bookToAdd);
@@ -27,18 +31,20 @@ const bookList = document.querySelector('.book-list');
 const printBooks = function() {
     //Todo need to stop it from printing everything out if ti is already there
     bookList.textContent = '';
+    // TODO create a toggle switch fro the isread
     myLibrary.forEach((book, index) => {
         let bookItem = document.createElement('li');
-        bookItem.setAttribute("data-index", index);
+        bookItem.setAttribute('class', 'book-card');
+        bookItem.setAttribute('data-index', index);
         bookItem.textContent = book.info();
-        let removeButton = document.createElement('div');
+        let removeButton = document.createElement('span');
         removeButton.setAttribute('class', 'remove-button');
         removeButton.textContent = 'Remove';
         bookItem.appendChild(removeButton);
         bookList.appendChild(bookItem);
     })
 
-    const removeButtons = document.querySelectorAll('div.remove-button');
+    const removeButtons = document.querySelectorAll('.remove-button');
     removeButtons.forEach((button) => {
         button.addEventListener('click', function(e) {
             const indexToRemove = e.target.parentNode.getAttribute('data-index');
