@@ -78,8 +78,8 @@ showFormButton.addEventListener('click', function(e) {
 const createRemoveSVG = function() {
     let xlmns = 'http://www.w3.org/2000/svg';
     let svg = document.createElementNS(xlmns, 'svg');
-    svg.setAttributeNS(null, 'width', '1.5em');
-    svg.setAttributeNS(null, 'height', '1.5em');
+    svg.setAttributeNS(null, 'width', '1.8em');
+    svg.setAttributeNS(null, 'height', '1.8em');
     svg.setAttributeNS(null, 'viewBox', '0 0 16 16');
     svg.setAttributeNS(null, 'class', 'bi bi-x-circle');
     svg.setAttributeNS(null, 'fill', 'currentColor');
