@@ -19,7 +19,7 @@ header {
 
 header h1 {
     grid-column-start: 2;
-    margin: 0;
+    margin: 5px 0 0 10px;
 }
 
 main {
@@ -39,7 +39,6 @@ footer {
     position: relative;
     justify-items: end;
     z-index: 2;
-
 }
 
 .book-list {
@@ -64,6 +63,14 @@ footer {
     font-size: 1.8em;
 }
 
+.book-card svg {
+    transition: 0.15s ease-in;
+}
+
+.book-card svg:hover {
+    fill: red;
+}
+
 .remove-button {
     grid-column: 3 / 4;
     justify-self: end;
@@ -74,13 +81,14 @@ footer {
 
 .form-container {
     background-color: white;
-    box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.25);
+    box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.25);
     grid-column: 2 / 3;
     height: 200px;
     width: 85vw;
     max-width: 400px;
     position: absolute;
-    top: -230px;
+    top: -235px;
+    right: 10px;
     padding: 20px;
     border-radius: 10px;
     display: none;
@@ -91,11 +99,25 @@ footer {
 }
 
 form#add-book input[type="text"] {
-    width: 100%;
+    width: 95%;
     margin: 5px 0;
     height: 30px;
+    padding: 3px 10px 3px 10px;
     border: 1px solid #bbb;
-    border-radius: 15px;
+    border-radius: 19px;
+}
+
+form#add-book input[type="text"]:focus {
+    outline: none;
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.15);
+}
+
+form#add-book input[type="checkbox"]{
+    margin: 5px;
+}
+
+form#add-book input[type="submit"]{
+    float: right;
 }
 
 .add-book-button {
@@ -104,10 +126,17 @@ form#add-book input[type="text"] {
     justify-content: space-between;
     width: 190px;
     grid-column: 2 / 3;
+    margin-right: 10px;
     margin-top: 20px;
     padding: 5px 5px 5px 10px;
     border-radius: 32px;
     font-size: 2em;
     box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.2);
     cursor: pointer;
+    transition: 0.15s ease-in;
+}
+
+.add-book-button:hover {
+    color: rgba(78, 110, 255, 1);
+    box-shadow: 0px 0px 10px 2px rgb(78, 110, 255, 0.5);
 }
