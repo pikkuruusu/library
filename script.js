@@ -8,12 +8,15 @@ function Book(title, author, pages, isRead) {
 }
 
 Book.prototype.info = function() {
-    let readString = this.isRead ? "read" : "not read yet";
-    return `${this.title} by ${this.author}, ${this.pages} pages, ${readString}`; 
+    return `${this.title} by ${this.author}, ${this.pages} pages`; 
 }
 
 Book.prototype.changeReadStatus = function() {
-    return !this.isRead;
+    this.isRead = !this.isRead;
+}
+
+Book.prototype.getReadStatus = function() {
+    return this.isRead;
 }
 
 function addBookToLibrary(library, title, author, pages, isRead) {
@@ -37,12 +40,32 @@ const printBooks = function() {
         bookItem.setAttribute('class', 'book-card');
         bookItem.setAttribute('data-index', index);
         bookItem.textContent = book.info();
+        let readStatus = document.createElement('span');
+        readStatus.setAttribute('class', book.getReadStatus() ? 'read-status read' : 'read-status not-read')
+        readStatus.textContent = book.getReadStatus() ? 'Read' : 'Not read';
+        bookItem.appendChild(readStatus);
         let removeButton = document.createElement('span');
         removeButton.setAttribute('class', 'remove-button');
         removeButton.appendChild(createRemoveSVG());
         bookItem.appendChild(removeButton);
         
         bookList.appendChild(bookItem);
+    })
+
+    const readStatusButton = document.querySelectorAll('.read-status');
+    readStatusButton.forEach(button => {
+        button.addEventListener('click', function(e) {
+            const indexOfBook = e.target.parentNode.getAttribute('data-index');
+            myLibrary[indexOfBook].changeReadStatus();
+            if (button.classList.contains('read')) {
+                button.classList.remove('read');
+                button.classList.add('not-read');
+            } else {
+                button.classList.remove('not-read');
+                button.classList.add('read');
+            }
+            button.textContent = myLibrary[indexOfBook].getReadStatus() ? 'Read' : 'Not read';
+        })
     })
 
     const removeButtons = document.querySelectorAll('.remove-button');

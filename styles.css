@@ -63,6 +63,7 @@ main h2 {
     background-color: rgba(255, 255, 255, 1);
     display: grid;
     grid-template-columns: auto auto auto;
+    align-items: center;
     width: 90vw;
     max-width: 800px;
     max-height: 100px;
@@ -74,12 +75,18 @@ main h2 {
     font-size: 1.8em;
 }
 
-.book-card svg {
-    transition: 0.15s ease-in;
+.read-status {
+    cursor: pointer;
+    font-size: 0.8em;
+    margin: 0 10px;
 }
 
-.book-card svg:hover {
-    fill: red;
+.read-status.read {
+    color: rgb(0, 221, 0);
+}
+
+.read-status.not-read {
+    color: red;
 }
 
 .remove-button {
@@ -88,6 +95,14 @@ main h2 {
     padding: 5px;
     cursor: pointer;
     color: #bbb;
+}
+
+.book-card svg {
+    transition: 0.15s ease-in;
+}
+
+.book-card svg:hover {
+    fill: red;
 }
 
 .form-container {
