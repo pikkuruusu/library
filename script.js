@@ -54,16 +54,6 @@ const printBooks = function() {
 });
 };
 
-const addBookForm = document.getElementById('add-book');
-addBookForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    let title = document.getElementById('title').value;
-    let author = document.getElementById('author').value;
-    let pages = document.getElementById('pages').value;
-    let isRead = document.getElementById('isread').checked;
-    addBookToLibrary(myLibrary, title, author, pages, isRead);
-});
-
 const showFormButton = document.querySelector('.add-book-button');
 const formContainer = document.querySelector('.form-container');
 showFormButton.addEventListener('click', function(e) {
@@ -74,6 +64,16 @@ showFormButton.addEventListener('click', function(e) {
     }
 })
 
+const addBookForm = document.getElementById('add-book');
+addBookForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    let title = document.getElementById('title').value;
+    let author = document.getElementById('author').value;
+    let pages = document.getElementById('pages').value;
+    let isRead = document.getElementById('isread').checked;
+    addBookToLibrary(myLibrary, title, author, pages, isRead);
+    formContainer.classList.remove('show');
+});
 
 const createRemoveSVG = function() {
     let xlmns = 'http://www.w3.org/2000/svg';
