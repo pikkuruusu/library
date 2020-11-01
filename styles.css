@@ -138,6 +138,20 @@ form#add-book input[type="text"]:focus {
     box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.15);
 }
 
+form#add-book input[type="number"] {
+    width: 25%;
+    margin: 5px 0;
+    height: 30px;
+    padding: 3px 10px 3px 10px;
+    border: 1px solid #bbb;
+    border-radius: 19px;
+}
+
+form#add-book input[type="number"]:focus {
+    outline: none;
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.15);
+}
+
 form#add-book input[type="checkbox"]{
     margin: 5px;
 }

@@ -22,19 +22,19 @@ Book.prototype.getReadStatus = function() {
 function addBookToLibrary(library, title, author, pages, isRead) {
     let bookToAdd = new Book(title, author, pages, isRead);
     library.push(bookToAdd);
+    localStorage.setItem('library', JSON.stringify(library));
     printBooks();
 }
 
 function removeBook(library, index) {
     library.splice(index, 1);
+    localStorage.setItem('library', JSON.stringify(library));
     printBooks();
 }
 
 const bookList = document.querySelector('.book-list');
 const printBooks = function() {
-    //Todo need to stop it from printing everything out if ti is already there
     bookList.textContent = '';
-    // TODO create a toggle switch fro the isread
     myLibrary.forEach((book, index) => {
         let bookItem = document.createElement('li');
         bookItem.setAttribute('class', 'book-card');
@@ -118,5 +118,16 @@ const createRemoveSVG = function() {
 }
 
 
-addBookToLibrary(myLibrary, "Best book", "Staffan", 234, true);
-addBookToLibrary(myLibrary, "Best book 2", "Staffan S", 234, true);
+/* addBookToLibrary(myLibrary, "Best book", "Staffan", 234, true);
+addBookToLibrary(myLibrary, "Best book 2", "Staffan S", 234, true); */
+const getStoredBooks = function() {
+    if (localStorage.getItem('library') != null) {
+        let storedLibrary = JSON.parse(localStorage.getItem('library'));
+        storedLibrary.forEach(book => {
+            myLibrary.push(new Book(book.title, book.author, book.pages, book.isRead));
+        })
+        printBooks();
+    }
+}
+
+getStoredBooks();
