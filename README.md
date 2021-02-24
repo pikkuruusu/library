@@ -2,4 +2,4 @@
 
 A page that stores books in a library. 
 
-An exercise in constructing and instantiating objects. It was also an opportunity to use local storage.
+An exercise in objects and classes in js. It was also an opportunity to use local storage.
