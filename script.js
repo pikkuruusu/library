@@ -1,35 +1,45 @@
 let myLibrary = [];
 
-function Book(title, author, pages, isRead) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.isRead = isRead;
-}
+class Book {
+    constructor(title, author, pages, isRead) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.isRead = isRead;
+    }
 
-Book.prototype.info = function() {
-    return `${this.title} by ${this.author}, ${this.pages} pages`; 
-}
+    info() {
+        return `${this.title} by ${this.author}, ${this.pages} pages`; 
+    }
+    
+    changeReadStatus() {
+        this.isRead = !this.isRead;
+    }
 
-Book.prototype.changeReadStatus = function() {
-    this.isRead = !this.isRead;
-}
+    get isRead() {
+        return this._isRead;
+    }
 
-Book.prototype.getReadStatus = function() {
-    return this.isRead;
+    set isRead(value) {
+        this._isRead = value;
+    }
 }
 
 function addBookToLibrary(library, title, author, pages, isRead) {
     let bookToAdd = new Book(title, author, pages, isRead);
     library.push(bookToAdd);
-    localStorage.setItem('library', JSON.stringify(library));
+    updateLocalStorage(library);
     printBooks();
 }
 
 function removeBook(library, index) {
     library.splice(index, 1);
-    localStorage.setItem('library', JSON.stringify(library));
+    updateLocalStorage(library);
     printBooks();
+}
+
+function updateLocalStorage(library) {
+    localStorage.setItem('library', JSON.stringify(library));
 }
 
 const bookList = document.querySelector('.book-list');
@@ -41,8 +51,8 @@ const printBooks = function() {
         bookItem.setAttribute('data-index', index);
         bookItem.textContent = book.info();
         let readStatus = document.createElement('span');
-        readStatus.setAttribute('class', book.getReadStatus() ? 'read-status read' : 'read-status not-read')
-        readStatus.textContent = book.getReadStatus() ? 'Read' : 'Not read';
+        readStatus.setAttribute('class', book.isRead ? 'read-status read' : 'read-status not-read')
+        readStatus.textContent = book.isRead ? 'Read' : 'Not read';
         bookItem.appendChild(readStatus);
         let removeButton = document.createElement('span');
         removeButton.setAttribute('class', 'remove-button');
@@ -64,7 +74,8 @@ const printBooks = function() {
                 button.classList.remove('not-read');
                 button.classList.add('read');
             }
-            button.textContent = myLibrary[indexOfBook].getReadStatus() ? 'Read' : 'Not read';
+            button.textContent = myLibrary[indexOfBook].isRead ? 'Read' : 'Not read';
+            updateLocalStorage(myLibrary);
         })
     })
 
@@ -118,13 +129,11 @@ const createRemoveSVG = function() {
 }
 
 
-/* addBookToLibrary(myLibrary, "Best book", "Staffan", 234, true);
-addBookToLibrary(myLibrary, "Best book 2", "Staffan S", 234, true); */
 const getStoredBooks = function() {
     if (localStorage.getItem('library') != null) {
         let storedLibrary = JSON.parse(localStorage.getItem('library'));
         storedLibrary.forEach(book => {
-            myLibrary.push(new Book(book.title, book.author, book.pages, book.isRead));
+            myLibrary.push(new Book(book.title, book.author, book.pages, book._isRead));
         })
         printBooks();
     }
